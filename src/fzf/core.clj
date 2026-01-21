@@ -24,6 +24,10 @@
 (s/def :fzf/case-insensitive boolean?)
 (s/def :fzf/exact boolean?)
 (s/def :fzf/throw boolean?)
+(s/def :fzf/no-info boolean?)
+(s/def :fzf/no-separator boolean?)
+(s/def :fzf/pointer string?)
+(s/def :fzf/select-first boolean?)
 
 (s/def :fzf/opts
   (s/and  (s/keys
@@ -40,7 +44,11 @@
                     :fzf/exact
                     :fzf/throw
                     :fzf/select-1
-                    :fzf/query])
+                    :fzf/query
+                    :fzf/no-info
+                    :fzf/no-separator
+                    :fzf/pointer
+                    :fzf/select-first])
           #(not (and (:preview %) (:preview-fn %)))))
 
 (s/def :fzf/args sequential?)
@@ -68,6 +76,10 @@
    - throw: Bool, throw when no candidates were selected (default: return nil)
    - select-1: Bool, automatically select if only one match
    - query: String, start finder with the specified query
+   - no-info: Bool, toggle to hide number of matches. Default: false (show number of matches).
+   - no-separator: Bool, hide the horizontal separator line. Default: false (show separator line).
+   - pointer: String, pointer to the current line (default: '▌')
+   - select-first: Bool, select the first (top) as the initial selection.
 
    `args`: Input arguments to fzf (optional, list of strings)
 
