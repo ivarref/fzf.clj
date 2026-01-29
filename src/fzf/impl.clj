@@ -27,7 +27,7 @@
    (parse-opts opts args nil))
   ([opts args server-port]
    (let [{:keys [dir multi preview-fn preview tac case-insensitive exact reverse height select-1
-                 query no-info no-separator pointer select-first]
+                 query no-info no-separator pointer select-first filter]
           {:keys [header-str header-lines header-first]} :header} opts]
      {:cmd (cond-> ["fzf"]
              multi (conj "--multi")
@@ -47,7 +47,8 @@
              no-separator (conj "--no-separator")
              pointer (conj "--pointer" pointer)
              select-first (conj "--sync")
-             select-first (conj "--bind" "start:pos(-1)"))
+             select-first (conj "--bind" "start:pos(-1)")
+             filter (conj "--filter" filter))
       :opts (cond-> {:in :inherit
                      :out :string
                      :err :inherit}

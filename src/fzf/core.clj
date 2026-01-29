@@ -28,27 +28,29 @@
 (s/def :fzf/no-separator boolean?)
 (s/def :fzf/pointer string?)
 (s/def :fzf/select-first boolean?)
+(s/def :fzf/filter string?)
 
 (s/def :fzf/opts
   (s/and  (s/keys
-           :opt-un [:fzf/in
+           :opt-un [:fzf/case-insensitive
                     :fzf/dir
-                    :fzf/multi
-                    :fzf/preview
-                    :fzf/preview-fn
-                    :fzf/reverse
+                    :fzf/exact
+                    :fzf/filter
                     :fzf/header
                     :fzf/height
-                    :fzf/tac
-                    :fzf/case-insensitive
-                    :fzf/exact
-                    :fzf/throw
-                    :fzf/select-1
-                    :fzf/query
+                    :fzf/in
+                    :fzf/multi
                     :fzf/no-info
                     :fzf/no-separator
                     :fzf/pointer
-                    :fzf/select-first])
+                    :fzf/preview
+                    :fzf/preview-fn
+                    :fzf/query
+                    :fzf/reverse
+                    :fzf/select-1
+                    :fzf/select-first
+                    :fzf/tac
+                    :fzf/throw])
           #(not (and (:preview %) (:preview-fn %)))))
 
 (s/def :fzf/args sequential?)
@@ -80,6 +82,7 @@
    - no-separator: Bool, hide the horizontal separator line. Default: false (show separator line).
    - pointer: String, pointer to the current line (default: '▌')
    - select-first: Bool, select the first (top) as the initial selection.
+   - filter: String, specify what to search for. Runs fzf non interactively, only the algorithm.
 
    `args`: Input arguments to fzf (optional, list of strings)
 
